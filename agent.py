@@ -1,4 +1,4 @@
-from uagents import Agent, Context
+from uagents import Agent, Context # type: ignore
  
 alice = Agent(name="alice", seed="alice recovery phrase")
  
