@@ -14,9 +14,9 @@ class GeoCode(BaseModel):
 URL = "https://maps.googleapis.com/maps/api/geocode/json"
 
 # You should replace this with a real API key.
-API_KEY = "AIzaSyDyW751uUIXh9NfN8J3g5sP8dJDgOGOvCo"
+API_KEY = ""
 
-if API_KEY == "AIzaSyDyW751uUIXh9NfN8J3g5sP8dJDgOGOvCo":
+if API_KEY == "":
     raise Exception("You need to provide an API key for Google Maps API to use this example")
 
 geocode_protocol = Protocol("GeoCode")
