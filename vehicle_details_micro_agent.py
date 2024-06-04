@@ -76,15 +76,15 @@ async def fetch_vehicle_details(ctx: Context, sender: str, msg: VehicleDetailsRe
     )
     ctx.logger.info(f"Fetched vehicle details: {details}")
 
-# Alice requests payment
-@alice.on_interval(period=20.0)
-async def request_funds(ctx: Context):
-    await ctx.send(
-        bob.address,
-        PaymentRequest(
-            wallet_address=str(ctx.wallet.address()), amount=AMOUNT, denom=DENOM
-        ),
-    )
+# # Alice requests payment
+# @alice.on_interval(period=20.0)
+# async def request_funds(ctx: Context):
+#     await ctx.send(
+#         bob.address,
+#         PaymentRequest(
+#             wallet_address=str(ctx.wallet.address()), amount=AMOUNT, denom=DENOM
+#         ),
+#     )
 
 @alice.on_message(model=TransactionInfo)
 async def confirm_transaction(ctx: Context, sender: str, msg: TransactionInfo):
@@ -97,13 +97,13 @@ async def confirm_transaction(ctx: Context, sender: str, msg: TransactionInfo):
     ):
         ctx.logger.info(f"Transaction was successful: {coin_received}")
 
-@bob.on_message(model=PaymentRequest, replies=TransactionInfo)
-async def send_payment(ctx: Context, sender: str, msg: PaymentRequest):
-    ctx.logger.info(f"Received payment request from {sender}: {msg}")
-    transaction = ctx.ledger.send_tokens(
-        msg.wallet_address, msg.amount, msg.denom, ctx.wallet
-    )
-    await ctx.send(alice.address, TransactionInfo(tx_hash=transaction.tx_hash))
+# @bob.on_message(model=PaymentRequest, replies=TransactionInfo)
+# async def send_payment(ctx: Context, sender: str, msg: PaymentRequest):
+#     ctx.logger.info(f"Received payment request from {sender}: {msg}")
+#     transaction = ctx.ledger.send_tokens(
+#         msg.wallet_address, msg.amount, msg.denom, ctx.wallet
+#     )
+#     await ctx.send(alice.address, TransactionInfo(tx_hash=transaction.tx_hash))
 
 bureau = Bureau()
 bureau.add(alice)
